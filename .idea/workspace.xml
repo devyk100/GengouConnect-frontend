@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6045dc17-6012-45c5-b8d8-888746540d6d" name="Changes" comment="" />
+    <list default="true" id="6045dc17-6012-45c5-b8d8-888746540d6d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/utils/SFUHandler.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/test/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/test/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/live-class/LiveCameraView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/live-class/LiveCameraView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/live-class/LiveChatView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/live-class/LiveChatView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/live-class/LiveClassComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/live-class/LiveClassComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/WebSocketHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/WebSocketHandler.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,24 +41,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "JavaScript Debug.Debug Application.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/yash",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "npm",
-    "npm.dev.executor": "Run",
-    "ts.external.directory.path": "/home/yash/Desktop/golang-projs/GengouConnect/frontend/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;JavaScript Debug.Debug Application.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/yash&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/yash/Desktop/golang-projs/GengouConnect/frontend/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components/liveclass" />
@@ -91,7 +100,8 @@
       <workItem from="1721044949479" duration="2344000" />
       <workItem from="1721119187502" duration="7696000" />
       <workItem from="1721186222575" duration="9845000" />
-      <workItem from="1721199055813" duration="20741000" />
+      <workItem from="1721199055813" duration="21693000" />
+      <workItem from="1721274905555" duration="14543000" />
     </task>
     <servers />
   </component>

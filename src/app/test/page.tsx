@@ -3,7 +3,8 @@ import dynamic from 'next/dynamic';
 import {SessionProvider, useSession} from "next-auth/react";
 import {useSearchParams} from "next/navigation";
 import {UserType} from "@/utils/WebSocketHandler";
-const LiveClassComponent = dynamic(() => import("@/components/live-class/LiveClassComponent"), { ssr: false });
+import LiveClassComponent from "@/components/live-class/LiveClassComponent";
+// const LiveClassComponent = dynamic(() => import("@/components/live-class/LiveClassComponent"), { ssr: false });
 
 export default function Home() {
     const classId =  "123"

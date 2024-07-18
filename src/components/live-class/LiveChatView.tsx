@@ -2,7 +2,7 @@ import {ChatType, UserType, WebSocketHandler} from "@/utils/WebSocketHandler";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {Separator} from "@/components/ui/separator";
 import {Input} from "@/components/ui/input"
-import {useEffect, useRef, useState} from "react";
+import {RefObject, useEffect, useRef, useState} from "react";
 import {Button} from "@/components/ui/button";
 import {useQuery} from "@tanstack/react-query";
 
@@ -12,27 +12,28 @@ type User = {
     userId: string
 }
 
-export default function LiveChatView({classId, userId, userType}: {
+export default function LiveChatView({classId, userId, userType, videoRef}: {
     classId: string;
     userId: string;
-    userType: UserType
+    userType: UserType;
+    videoRef: RefObject<HTMLVideoElement>;
 }) {
     const [chatText, setChatText] = useState<string>("");
-    const info = useQuery({ queryKey: ['chatList'], queryFn: () => WebSocketHandler.getInstance(userType, classId, userId).getChats() })
+    const info = useQuery({ queryKey: ['chatList'], queryFn: () => WebSocketHandler.getInstance(userType, classId, userId, videoRef).getChats() })
     const [Chats, setChats] = useState<ChatType[]>([]);
-    useEffect(() => {
-        if(info.data)
-        setChats(info.data.filter((val:any) => val.from != ""));
-    }, [info.data]);
+        useEffect(() => {
+            if(info.data)
+            setChats(info.data.filter((val:any) => val.from != ""));
+        }, [info.data]);
     useEffect(() => {
         console.log("RERENDERED")
-        WebSocketHandler.getInstance(userType, classId, userId).setOnChatHandler((val) => {
+        WebSocketHandler.getInstance(userType, classId, userId, videoRef).setOnChatHandler((val) => {
             setChats((prevChats) => [...prevChats, val]);
             console.log("NEW CHAT CAME", val.from);
         })
         inputRef.current?.addEventListener("keyup", (event) => {
             if (event.key != "enter") return
-            WebSocketHandler.getInstance(userType, classId, userId).sendChat(chatText)
+            WebSocketHandler.getInstance(userType, classId, userId,videoRef ).sendChat(chatText)
             setChatText("");
         })
     }, [])
@@ -57,7 +58,7 @@ export default function LiveChatView({classId, userId, userType}: {
                        onChange={e => setChatText(e.target.value)}/>
                 <Button onClick={() => {
                 // console.log(WebSocketHandler.getInstance(UserType.Instructor, classId, userId))
-                WebSocketHandler.getInstance(userType, classId, userId).sendChat(chatText)
+                WebSocketHandler.getInstance(userType, classId, userId, videoRef).sendChat(chatText)
                 setChatText("")
             }}>Send</Button>
             </div>

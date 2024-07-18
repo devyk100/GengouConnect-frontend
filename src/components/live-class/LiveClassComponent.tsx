@@ -7,13 +7,14 @@ import {
 import LiveChatView from "@/components/live-class/LiveChatView";
 import LiveCameraView from "@/components/live-class/LiveCameraView";
 import LiveCanvasView from "@/components/live-class/LiveCanvasView";
-import {useEffect, useState} from "react";
+import {RefObject, useEffect, useRef, useState} from "react";
 import {UserType, WebSocketHandler} from "@/utils/WebSocketHandler";
 
-export function Resizable({classId, userId, userType}: {
+export function Resizable({classId, userId, userType, videoRef}: {
     classId: string;
     userId: string;
-    userType: UserType
+    userType: UserType;
+    videoRef: RefObject<HTMLVideoElement>;
 }) {
     return (
         <ResizablePanelGroup
@@ -27,11 +28,11 @@ export function Resizable({classId, userId, userType}: {
             <ResizablePanel defaultSize={20}>
                 <ResizablePanelGroup direction="vertical">
                     <ResizablePanel defaultSize={25}>
-                        <LiveCameraView />
+                        <LiveCameraView videoRef={videoRef}/>
                     </ResizablePanel>
                     <ResizableHandle className="dark:bg-primary bg-primary-foreground" />
                     <ResizablePanel defaultSize={75}>
-                        <LiveChatView classId={classId} userId={userId} userType={userType}/>
+                        <LiveChatView classId={classId} userId={userId} userType={userType} videoRef={videoRef}/>
                     </ResizablePanel>
                 </ResizablePanelGroup>
             </ResizablePanel>
@@ -44,14 +45,13 @@ export default function LiveClassComponent({classId, userId, userType}: {
     userId: string;
     userType: UserType
 }) {
+    const videoRef = useRef<HTMLVideoElement>(null);
     useEffect(() => {
-        const connection = WebSocketHandler.getInstance(UserType.Instructor, classId, userId)
-
-    })
-
+        WebSocketHandler.getInstance(UserType.Instructor, classId, userId, videoRef)
+    }, [videoRef])
     return (
         <>
-                <Resizable classId={classId} userId={userId} userType={userType}/>
+                <Resizable classId={classId} userId={userId} videoRef={videoRef} userType={userType}/>
         </>
     )
 }
