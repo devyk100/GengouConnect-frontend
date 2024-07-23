@@ -17,7 +17,7 @@ export class SFUHandler {
         this.peerConnection = new RTCPeerConnection({
             iceServers: [
                 {
-                    urls: [`turn:${process.env.NEXT_PUBLIC_TURN_IP}:3478`, "stun:stun.l.google.com:19302", "stun:stun.services.mozilla.com"],
+                    urls: [`stun:${process.env.NEXT_PUBLIC_TURN_IP}:3478`, "stun:stun.l.google.com:19302", `turn:${process.env.NEXT_PUBLIC_TURN_IP}:3478`,],
                     username: "user",
                     credential: "pass"
                 }
