@@ -1,76 +1,100 @@
 "use client"
 import {AspectRatio} from "@/components/ui/aspect-ratio";
 import {useEffect, useRef, useState} from "react";
-import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group"
 import {Button} from "@/components/ui/button";
-import dynamic from "next/dynamic";
-import {Canvas, Rect} from 'fabric'; // browser
-enum AnnotationType {
-    Line = "line",
-    FreeHand = "freehand",
-    Rectangle = "rectangle",
-    Circle = "circle",
-    Text = "text",
-    Image = "image"
-}
+import {Canvas} from "fabric"
+import ColorPicker from "@/components/ColorPicker"; // browser
+import rectIcon from "@/../public/rectangle.svg"
+import pencilIcon from "@/../public/pencil.svg"
+import circleIcon from "@/../public/circle.svg"
+import cursorTextIcon from "@/../public/cursor-text.svg"
+import lineIcon from "@/../public/line.svg"
+import imageInPictureIcon from "@/../public/image-in-picture.svg"
+import trashIcon from "@/../public/trash.svg"
+import Image from "next/image";
+import {fabricApi, userType} from "@/utils/FabricApi";
 
 function ToolBar() {
     return (
         <span className="py-2">
-            <ToggleGroup type="single">
-                <ToggleGroupItem value={AnnotationType.Line}>Line</ToggleGroupItem>
-                <ToggleGroupItem value={AnnotationType.FreeHand}>Free</ToggleGroupItem>
-                <ToggleGroupItem value={AnnotationType.Rectangle}>Rect</ToggleGroupItem>
-                <ToggleGroupItem value={AnnotationType.Circle}>Circle</ToggleGroupItem>
-                <ToggleGroupItem value={AnnotationType.Text}>Text</ToggleGroupItem>
-                <ToggleGroupItem value={AnnotationType.Image}>Image</ToggleGroupItem>
-            </ToggleGroup>
+            <ul className="flex">
+                <li>
+                    <Button variant={"default"} className="rounded-none" onClick={() => {
+                        fabricApi.getInstance({})?.toggleFreeHandMode()
+                    }}>
+                        <Image src={pencilIcon} alt={"Pencil"}/>
+                    </Button>
+                </li>
+                <li>
+                    <Button variant={"default"} className="rounded-none" onClick={() => {
+                        fabricApi.getInstance({})?.addRect()
+                    }}>
+                    <Image src={rectIcon} alt={"Rectangle"}/>
+                </Button>
+                </li>
+                <li>
+                    <Button variant={"default"} className="rounded-none" onClick={() => {
+                        fabricApi.getInstance({})?.toggleFreeHandMode()
+                    }}>
+                        <Image src={circleIcon} alt={"circle"}/>
+                    </Button>
+                </li>
+                <li>
+                    <Button variant={"default"} className="rounded-none" onClick={() => {
+                        fabricApi.getInstance({})?.toggleFreeHandMode()
+                    }}>
+                        <Image src={cursorTextIcon} alt={"cursor text icon"}/>
+                    </Button>
+                </li>
+                <li>
+                    <Button variant={"default"} className="rounded-none" onClick={() => {
+                        fabricApi.getInstance({})?.toggleFreeHandMode()
+                    }}>
+                        <Image src={lineIcon} alt={"line icon"}/>
+                    </Button>
+                </li>
+                <li>
+                    <Button variant={"default"} className="rounded-none" onClick={() => {
+                        fabricApi.getInstance({})?.toggleFreeHandMode()
+                    }}>
+                        <Image src={imageInPictureIcon} alt={"image in picture icon"}/>
+                    </Button>
+                </li>
+                <li>
+                    <Button variant={"destructive"} className="rounded-none" onClick={() => {
+                        fabricApi.getInstance({})?.toggleFreeHandMode()
+                    }}>
+                        <Image src={trashIcon} alt={"trash icon"}/>
+                    </Button>
+                </li>
+            </ul>
+                <ColorPicker/>
         </span>
     )
 }
 
 export default function LiveCanvasView() {
     const [canvasContext, updateCanvasContext] = useState<Canvas | null>();
-    const aspectRatio = useRef<HTMLDivElement>(null);
+    const aspectRatioRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     useEffect(() => {
-        const options = {};
-        const canvas = new Canvas(canvasRef.current!, options);
-        canvas.add(new Rect({
-            height: 500,
-            width: 100,
-            backgroundColor: "red",
-            rx: 100
-        }))
-        // make the fabric.Canvas instance available to your app
-        const resizeListener = () => {
-            const canvasElement = canvasRef.current;
-            if (canvasElement) {
-                console.log(aspectRatio.current!.clientWidth, aspectRatio.current!.clientHeight);
-                canvasElement.width = aspectRatio.current!.clientWidth;
-                canvasElement.height = aspectRatio.current!.clientHeight;
-                canvas.setDimensions({ width: aspectRatio.current!.clientWidth, height: aspectRatio.current!.clientHeight });
-                canvas.renderAll();
-            }
-        };
-
-        resizeListener();
-
-        window.addEventListener("resize", resizeListener);
-
+        if (!canvasRef.current || !aspectRatioRef.current) return
+        const fabricApiInstance = fabricApi.getInstance({
+            canvasRef: canvasRef,
+            aspectRatio: aspectRatioRef,
+            UserType: userType.instructor,
+            options: {}
+        })
+        fabricApiInstance!.addRect()
         return () => {
-            window.removeEventListener("resize", resizeListener);
-            updateCanvasContext(null);
-            canvas.dispose().then(r => {});
-        };
+            fabricApiInstance!.cleanUp();
+        }
     }, []);
     return (
         <section className="flex h-screen flex-col items-center justify-center p-6">
             <ToolBar/>
-            <Button onClick={() => {
-            }}>Click</Button>
-            <AspectRatio ref={aspectRatio} className="aspect-ratio" ratio={16 / 9}>
-                <canvas ref={canvasRef} className="w-full h-full"/>
+            <AspectRatio ref={aspectRatioRef} className="aspect-ratio" ratio={16 / 9}>
+                <canvas ref={canvasRef} className="w-full h-full z-30"/>
             </AspectRatio>
         </section>
     )
