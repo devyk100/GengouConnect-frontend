@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6045dc17-6012-45c5-b8d8-888746540d6d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/ui/toggle-group.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/toggle.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/CanvasApi.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/FabricApi.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/live-class/LiveCanvasView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/live-class/LiveCanvasView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/SFUHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/SFUHandler.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +99,8 @@
       <workItem from="1721274905555" duration="34350000" />
       <workItem from="1721329897481" duration="9000" />
       <workItem from="1721330307218" duration="1489000" />
-      <workItem from="1721712498277" duration="1308000" />
+      <workItem from="1721712498277" duration="1962000" />
+      <workItem from="1721885927390" duration="2472000" />
     </task>
     <servers />
   </component>

@@ -1,10 +1,10 @@
 "use client"
 import {AspectRatio} from "@/components/ui/aspect-ratio";
 import {useEffect, useRef, useState} from "react";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import {ToggleGroup, ToggleGroupItem} from "@/components/ui/toggle-group"
 import {Button} from "@/components/ui/button";
 import dynamic from "next/dynamic";
-import { Canvas, Rect } from 'fabric'; // browser
+import {Canvas, Rect} from 'fabric'; // browser
 enum AnnotationType {
     Line = "line",
     FreeHand = "freehand",
@@ -14,7 +14,7 @@ enum AnnotationType {
     Image = "image"
 }
 
-function ToolBar(){
+function ToolBar() {
     return (
         <span className="py-2">
             <ToggleGroup type="single">
@@ -29,33 +29,48 @@ function ToolBar(){
     )
 }
 
-export default function LiveCanvasView(){
-    const [canvasContext, updateCanvasContext] = useState<Canvas|null>();
+export default function LiveCanvasView() {
+    const [canvasContext, updateCanvasContext] = useState<Canvas | null>();
+    const aspectRatio = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     useEffect(() => {
-        const options = {
-        };
+        const options = {};
         const canvas = new Canvas(canvasRef.current!, options);
         canvas.add(new Rect({
-            height: 100,
+            height: 500,
             width: 100,
-            backgroundColor: "red"
+            backgroundColor: "red",
+            rx: 100
         }))
         // make the fabric.Canvas instance available to your app
-        updateCanvasContext(canvas);
+        const resizeListener = () => {
+            const canvasElement = canvasRef.current;
+            if (canvasElement) {
+                console.log(aspectRatio.current!.clientWidth, aspectRatio.current!.clientHeight);
+                canvasElement.width = aspectRatio.current!.clientWidth;
+                canvasElement.height = aspectRatio.current!.clientHeight;
+                canvas.setDimensions({ width: aspectRatio.current!.clientWidth, height: aspectRatio.current!.clientHeight });
+                canvas.renderAll();
+            }
+        };
+
+        resizeListener();
+
+        window.addEventListener("resize", resizeListener);
+
         return () => {
+            window.removeEventListener("resize", resizeListener);
             updateCanvasContext(null);
             canvas.dispose().then(r => {});
-        }
+        };
     }, []);
     return (
         <section className="flex h-screen flex-col items-center justify-center p-6">
-            <ToolBar />
+            <ToolBar/>
             <Button onClick={() => {
-
             }}>Click</Button>
-            <AspectRatio className="aspect-ratio" ratio={16/9}>
-            <canvas ref={canvasRef} height={1080} width={1920} />
+            <AspectRatio ref={aspectRatio} className="aspect-ratio" ratio={16 / 9}>
+                <canvas ref={canvasRef} className="w-full h-full"/>
             </AspectRatio>
         </section>
     )
