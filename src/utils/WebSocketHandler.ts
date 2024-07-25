@@ -41,11 +41,12 @@ export interface WebRTCEvent {
 
 export interface SocketEvent {
     eventType: string;
-    text: Text;
-    annotation: Annotation;
-    shape: Shape;
-    image: Image;
-    webrtcEvent: WebRTCEvent;
+    text?: Text;
+    annotation?: Annotation;
+    shape?: Shape;
+    image?: Image;
+    webrtcEvent?: WebRTCEvent;
+    boardSvg?: string;
     // Assuming Chat type is also defined similarly in TypeScript
     // chat: Chat; // Define Chat interface as needed
 }
@@ -63,7 +64,8 @@ export type ChatType = {
 
 export enum EventType {
     Chat = "chat",
-    WebRtc = "webrtc"
+    WebRtc = "webrtc",
+    Board = "board"
 }
 
 export class WebSocketHandler {
@@ -113,6 +115,7 @@ export class WebSocketHandler {
 
                 SFUHandler.getInstance(this.classId, this.socket!, this.userType, this.videoRef)
 
+
                 this.socket!.onmessage = (event: MessageEvent) => {
                     let data = JSON.parse(event.data)
                     console.log("A MESSAGE CAME")
@@ -158,6 +161,13 @@ export class WebSocketHandler {
             this.instance = new WebSocketHandler(userType, classId, userId, videoRef)
             return this.instance;
         }
+    }
+
+    static getSimpleInstance(){
+        if(this.instance){
+            return this.instance;
+        }
+        else return null;
     }
 
     sendChat(text: string) {

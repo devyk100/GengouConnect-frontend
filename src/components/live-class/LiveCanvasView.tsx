@@ -12,18 +12,50 @@ import lineIcon from "@/../public/line.svg"
 import imageInPictureIcon from "@/../public/image-in-picture.svg"
 import trashIcon from "@/../public/trash.svg"
 import Image from "next/image";
-import {fabricApi, userType} from "@/utils/FabricApi";
+import {fabricApi} from "@/utils/FabricApi";
+import {UserType} from "@/utils/WebSocketHandler";
+
+function FreeHandToolBar(){
+    return (
+        <>
+        </>
+    )
+}
+
+function ShapeToolBar(){
+    return (
+        <>
+        </>
+    )
+}
+
+function TextToolBar(){
+    return (
+        <>
+        </>
+    )
+}
 
 function ToolBar() {
+    const [freeHandOn, setFreeHandOn] = useState( false )
     return (
         <span className="py-2">
             <ul className="flex">
                 <li>
-                    <Button variant={"default"} className="rounded-none" onClick={() => {
-                        fabricApi.getInstance({})?.toggleFreeHandMode()
-                    }}>
-                        <Image src={pencilIcon} alt={"Pencil"}/>
-                    </Button>
+                    {
+                        freeHandOn?<Button variant={"secondary"} className="rounded-none bg-green-300" onClick={() => {
+                            setFreeHandOn( (val) => !val)
+                            fabricApi.getInstance({})?.toggleFreeHandMode()
+                        }}>
+                            <Image src={pencilIcon} alt={"Pencil"}/>
+                        </Button>: <Button variant={"default"} className="rounded-none" onClick={() => {
+                            setFreeHandOn( (val) => !val)
+
+                            fabricApi.getInstance({})?.toggleFreeHandMode()
+                        }}>
+                            <Image src={pencilIcon} alt={"Pencil"}/>
+                        </Button>
+                    }
                 </li>
                 <li>
                     <Button variant={"default"} className="rounded-none" onClick={() => {
@@ -41,7 +73,7 @@ function ToolBar() {
                 </li>
                 <li>
                     <Button variant={"default"} className="rounded-none" onClick={() => {
-                        fabricApi.getInstance({})?.toggleFreeHandMode()
+                        fabricApi.getInstance({})?.addText()
                     }}>
                         <Image src={cursorTextIcon} alt={"cursor text icon"}/>
                     </Button>
@@ -67,13 +99,18 @@ function ToolBar() {
                         <Image src={trashIcon} alt={"trash icon"}/>
                     </Button>
                 </li>
+                <li>
+                    <ColorPicker/>
+                </li>
             </ul>
-                <ColorPicker/>
+
         </span>
     )
 }
 
-export default function LiveCanvasView() {
+export default function LiveCanvasView({userType}: {
+    userType: UserType
+}) {
     const [canvasContext, updateCanvasContext] = useState<Canvas | null>();
     const aspectRatioRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -82,12 +119,14 @@ export default function LiveCanvasView() {
         const fabricApiInstance = fabricApi.getInstance({
             canvasRef: canvasRef,
             aspectRatio: aspectRatioRef,
-            UserType: userType.instructor,
-            options: {}
+            userType: UserType.Instructor,
+            options: {
+
+            }
         })
-        fabricApiInstance!.addRect()
+        fabricApiInstance?.addRect()
         return () => {
-            fabricApiInstance!.cleanUp();
+            fabricApiInstance?.cleanUp();
         }
     }, []);
     return (
