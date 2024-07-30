@@ -119,7 +119,7 @@ export default function LiveCanvasView({userType}: {
         const fabricApiInstance = fabricApi.getInstance({
             canvasRef: canvasRef,
             aspectRatio: aspectRatioRef,
-            userType: UserType.Instructor,
+            userType: userType,
             options: {
 
             }

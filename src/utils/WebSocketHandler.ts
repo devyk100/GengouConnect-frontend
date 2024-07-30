@@ -118,7 +118,7 @@ export class WebSocketHandler {
 
                 this.socket!.onmessage = (event: MessageEvent) => {
                     let data = JSON.parse(event.data)
-                    console.log("A MESSAGE CAME")
+                    console.log("A MESSAGE CAME", data.boardSvg)
                     if(data.eventType == EventType.Chat){
                         console.log("ON MESSAGE CALLED")
                         this.OnChat(data as ChatType)
@@ -207,6 +207,8 @@ export class WebSocketHandler {
     }
 
     sendEvent(val: SocketEvent) {
+        console.log(JSON.stringify(val));
+        // if(this.socket)
         this.socket!.send(JSON.stringify(val))
     }
 

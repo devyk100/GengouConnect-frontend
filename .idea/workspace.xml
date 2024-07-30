@@ -7,6 +7,7 @@
     <list default="true" id="6045dc17-6012-45c5-b8d8-888746540d6d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/live-class/LiveCanvasView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/live-class/LiveCanvasView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/live-class/LiveClassComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/live-class/LiveClassComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/FabricApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/FabricApi.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/WebSocketHandler.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/WebSocketHandler.ts" afterDir="false" />
     </list>
@@ -103,12 +104,23 @@
       <workItem from="1721330307218" duration="1489000" />
       <workItem from="1721712498277" duration="1962000" />
       <workItem from="1721885927390" duration="16442000" />
-      <workItem from="1721907209679" duration="7038000" />
+      <workItem from="1721907209679" duration="11718000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

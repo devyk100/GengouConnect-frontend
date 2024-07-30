@@ -22,7 +22,7 @@ export function Resizable({classId, userId, userType, videoRef}: {
             className="w-screen rounded-lg border h-screen"
         >
             <ResizablePanel defaultSize={80}>
-                <LiveCanvasView />
+                <LiveCanvasView userType={userType}/>
             </ResizablePanel>
             <ResizableHandle className="dark:bg-primary bg-primary-foreground" />
             <ResizablePanel defaultSize={20}>
